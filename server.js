@@ -56,6 +56,7 @@ app.get('/types', handleGetTypes);
 app.get('/pokemon', handleGetPokemon);
 
 function validateBearerToken(req, res, next) {
+  console.log(process.env.API_TOKEN);
   const apiToken = process.env.API_TOKEN;
   const authToken = req.get('Authorization');
 
