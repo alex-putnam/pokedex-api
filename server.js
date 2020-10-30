@@ -1,7 +1,7 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 const helmet = require('helmet');
 
 const POKEDEX = require('./pokedex.json');
@@ -56,6 +56,9 @@ app.get('/types', handleGetTypes);
 app.get('/pokemon', handleGetPokemon);
 
 function validateBearerToken(req, res, next) {
+  console.log(req);
+  console.log(process.env.API_TOKEN);
+  console.log(req.get('Authorization'));
   const apiToken = process.env.API_TOKEN;
   const authToken = req.get('Authorization');
 
@@ -88,4 +91,6 @@ function handleGetPokemon(req, res) {
   res.json(response);
 }
 
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
+});
