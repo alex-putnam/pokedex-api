@@ -49,16 +49,13 @@ app.use((error, req, res, next) => {
   res.status(500).json(response);
 });
 
-app.use(validateBearerToken);
-
 app.get('/types', handleGetTypes);
 
 app.get('/pokemon', handleGetPokemon);
 
+app.use(validateBearerToken);
+
 function validateBearerToken(req, res, next) {
-  console.log(req);
-  console.log(process.env.API_TOKEN);
-  console.log(req.get('Authorization'));
   const apiToken = process.env.API_TOKEN;
   const authToken = req.get('Authorization');
 
